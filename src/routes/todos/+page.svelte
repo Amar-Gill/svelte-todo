@@ -1,5 +1,5 @@
 <h1>Todos</h1>
-<form>
+<form method="post" action="?/add">
 	<fieldset>
 		<legend>Add a Todo item</legend>
 		<label for="title">Title</label>
@@ -8,7 +8,6 @@
 		<input type="text" name="content" />
 		<div>
 			<button type="submit">Add</button>
-			<button type="submit">Delete</button>
 		</div>
 	</fieldset>
 </form>
