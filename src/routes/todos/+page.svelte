@@ -1,3 +1,9 @@
+<script lang="ts">
+	import type { PageData } from './$types';
+
+	export let data: PageData;
+</script>
+
 <h1>Todos</h1>
 <form method="post" action="?/add">
 	<fieldset>
@@ -11,6 +17,14 @@
 		</div>
 	</fieldset>
 </form>
+<div>
+	{#each data.todos as todo}
+		<article>
+			<p>{todo.title}</p>
+			<p>{todo.content}</p>
+		</article>
+	{/each}
+</div>
 
 <style>
 	form > fieldset {
