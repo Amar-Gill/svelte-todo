@@ -5,7 +5,7 @@ import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async () => {
 	return {
-		todos: await db.select().from(todos)
+		todos: await db.select().from(todos).orderBy(todos.id)
 	};
 }) satisfies PageServerLoad;
 
