@@ -1,5 +1,6 @@
 import { db } from '$lib/server';
 import { todos } from '$lib/server/schema';
+import { eq } from 'drizzle-orm';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async () => {
@@ -16,10 +17,11 @@ export const actions = {
 			content: formData.get('content')?.toString()
 		});
 	},
-	toggleComplete: async ({ request }) => {
+	toggleComplete: async ({ request, url }) => {
 		const formData = await request.formData();
-		const completed = formData.get('completed')?.toString();
-		console.log(completed);
+		const completed = parseBool(formData.get('completed')?.toString());
+		const id = parseInt(url.searchParams.get('id'));
+		await db.update(todos).set({ completed }).where(eq(todos.id, id));
 	}
 } satisfies Actions;
 

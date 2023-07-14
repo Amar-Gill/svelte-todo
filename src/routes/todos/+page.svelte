@@ -32,7 +32,7 @@
 		<article>
 			<p><b>{todo.title}</b></p>
 			<p>{todo.content}</p>
-			<form method="post" action="?/toggleComplete">
+			<form method="post" action={`?/toggleComplete&id=${todo.id}`}>
 				<label for="completed"
 					>Completed:
 					<input
