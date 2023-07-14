@@ -12,7 +12,7 @@ export const actions = {
 	add: async ({ request }) => {
 		const formData = await request.formData();
 		await db.insert(todos).values({
-			title: formData.get('string')?.toString(),
+			title: formData.get('title')?.toString(),
 			content: formData.get('content')?.toString()
 		});
 	}
