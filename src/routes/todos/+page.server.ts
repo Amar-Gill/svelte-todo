@@ -15,5 +15,14 @@ export const actions = {
 			title: formData.get('title')?.toString(),
 			content: formData.get('content')?.toString()
 		});
+	},
+	toggleComplete: async ({ request }) => {
+		const formData = await request.formData();
+		const completed = formData.get('completed')?.toString();
+		console.log(completed);
 	}
 } satisfies Actions;
+
+function parseBool(s?: string): boolean {
+	return s === 'true' ? true : false;
+}

@@ -2,6 +2,16 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
+
+	function handleToggleComplete(
+		e: Event & {
+			currentTarget: EventTarget & HTMLInputElement;
+		}
+	) {
+		const { checked } = e.currentTarget;
+		e.currentTarget.value = checked.toString();
+		e.currentTarget.form?.submit();
+	}
 </script>
 
 <h1>Todos</h1>
@@ -17,11 +27,22 @@
 		</div>
 	</fieldset>
 </form>
-<div>
+<div class="todos">
 	{#each data.todos as todo}
 		<article>
-			<p>{todo.title}</p>
+			<p><b>{todo.title}</b></p>
 			<p>{todo.content}</p>
+			<form method="post" action="?/toggleComplete">
+				<label for="completed"
+					>Completed:
+					<input
+						name="completed"
+						bind:checked={todo.completed}
+						type="checkbox"
+						on:input={(e) => handleToggleComplete(e)}
+					/></label
+				>
+			</form>
 		</article>
 	{/each}
 </div>
@@ -33,5 +54,8 @@
 	}
 	form > fieldset button {
 		text-transform: uppercase;
+	}
+	.todos > article {
+		background-color: lightsteelblue;
 	}
 </style>
