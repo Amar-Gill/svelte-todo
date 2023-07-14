@@ -30,7 +30,7 @@
 <div class="todos">
 	{#each data.todos as todo}
 		<article>
-			<p><b>{todo.title}</b></p>
+			<p><b>{todo.id}. {todo.title}</b></p>
 			<p>{todo.content}</p>
 			<form method="post" action={`?/toggleComplete&id=${todo.id}`}>
 				<label for="completed"
