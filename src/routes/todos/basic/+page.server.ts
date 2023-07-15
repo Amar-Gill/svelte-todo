@@ -1,13 +1,7 @@
 import { db } from '$lib/server';
 import { todos } from '$lib/server/schema';
 import { eq } from 'drizzle-orm';
-import type { Actions, PageServerLoad } from './$types';
-
-export const load = (async () => {
-	return {
-		todos: await db.select().from(todos).orderBy(todos.id)
-	};
-}) satisfies PageServerLoad;
+import type { Actions } from './$types';
 
 export const actions = {
 	add: async ({ request }) => {
