@@ -3,6 +3,7 @@
 	import type { ActionResult } from '@sveltejs/kit';
 	import type { PageData } from './$types';
 	import { invalidateAll } from '$app/navigation';
+	import TodoForm from '$lib/components/TodoForm.svelte';
 
 	export let data: PageData;
 
@@ -47,12 +48,7 @@
 		<article>
 			<p><b>{todo.id}. {todo.title}</b></p>
 			<p>{todo.content}</p>
-			<form method="post" action={`?/toggleTodoComplete&id=${todo.id}`} on:change={handleChange}>
-				<label for="completed"
-					>Completed:
-					<input name="completed" checked={todo.completed} type="checkbox" /></label
-				>
-			</form>
+			<TodoForm {todo} on:change={(e) => handleChange(e.detail)} />
 		</article>
 	{/each}
 </div>

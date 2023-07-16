@@ -1,4 +1,5 @@
 <script lang="ts">
+	import TodoForm from '$lib/components/TodoForm.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -22,16 +23,7 @@
 		<article>
 			<p><b>{todo.id}. {todo.title}</b></p>
 			<p>{todo.content}</p>
-			<form
-				method="post"
-				on:change={(e) => e.currentTarget.submit()}
-				action={`?/toggleTodoComplete&id=${todo.id}`}
-			>
-				<label for="completed"
-					>Completed:
-					<input name="completed" checked={todo.completed} type="checkbox" /></label
-				>
-			</form>
+			<TodoForm {todo} on:change={(e) => e.detail.currentTarget.submit()} />
 		</article>
 	{/each}
 </div>
