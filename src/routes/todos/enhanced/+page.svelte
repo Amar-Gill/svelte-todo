@@ -47,12 +47,7 @@
 		<article>
 			<p><b>{todo.id}. {todo.title}</b></p>
 			<p>{todo.content}</p>
-			<form
-				method="post"
-				action={`?/toggleTodoComplete&id=${todo.id}`}
-				on:change={handleChange}
-				on:submit|preventDefault={handleChange}
-			>
+			<form method="post" action={`?/toggleTodoComplete&id=${todo.id}`} on:change={handleChange}>
 				<label for="completed"
 					>Completed:
 					<input name="completed" checked={todo.completed} type="checkbox" /></label
