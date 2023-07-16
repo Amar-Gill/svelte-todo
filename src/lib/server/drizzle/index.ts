@@ -27,7 +27,3 @@ export const toggleTodoComplete: Action = async ({ request, url }) => {
 	const id = parseInt(url.searchParams.get('id'));
 	await db.update(todos).set({ completed }).where(eq(todos.id, id));
 };
-
-function parseBool(s?: string): boolean {
-	return s === 'true' ? true : false;
-}
