@@ -15,7 +15,7 @@
 </script>
 
 <h1>Todos</h1>
-<form method="post" action="?/add">
+<form method="post" action="?/addTodo">
 	<fieldset>
 		<legend>Add a Todo item</legend>
 		<label for="title">Title</label>
@@ -32,7 +32,7 @@
 		<article>
 			<p><b>{todo.id}. {todo.title}</b></p>
 			<p>{todo.content}</p>
-			<form method="post" action={`?/toggleComplete&id=${todo.id}`}>
+			<form method="post" action={`?/toggleTodoComplete&id=${todo.id}`}>
 				<label for="completed"
 					>Completed:
 					<input
