@@ -23,7 +23,7 @@ export const addTodo: Action = async ({ request }) => {
 
 export const toggleTodoComplete: Action = async ({ request, url }) => {
 	const formData = await request.formData();
-	const completed = parseBool(formData.get('completed')?.toString());
+	const completed = !!formData.get('completed');
 	const id = parseInt(url.searchParams.get('id'));
 	await db.update(todos).set({ completed }).where(eq(todos.id, id));
 };
