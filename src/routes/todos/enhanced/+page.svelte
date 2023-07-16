@@ -1,21 +1,36 @@
 <script lang="ts">
+	import { applyAction, deserialize, enhance } from '$app/forms';
+	import type { ActionResult } from '@sveltejs/kit';
 	import type { PageData } from './$types';
+	import { invalidateAll } from '$app/navigation';
 
 	export let data: PageData;
 
-	function handleToggleComplete(
-		e: Event & {
-			currentTarget: EventTarget & HTMLInputElement;
+	async function handleChange(
+		event: Event & {
+			currentTarget: EventTarget & HTMLFormElement;
 		}
 	) {
-		const { checked } = e.currentTarget;
-		e.currentTarget.value = checked.toString();
-		e.currentTarget.form?.submit();
+		const data = new FormData(event.currentTarget);
+
+		const response = await fetch(event.currentTarget.action, {
+			method: 'POST',
+			body: data
+		});
+
+		const result: ActionResult = deserialize(await response.text());
+
+		if (result.type === 'success') {
+			// rerun all `load` functions, following the successful update
+			await invalidateAll();
+		}
+
+		applyAction(result);
 	}
 </script>
 
 <h1>Todos</h1>
-<form method="post" action="?/addTodo">
+<form method="post" action="?/addTodo" use:enhance>
 	<fieldset>
 		<legend>Add a Todo item</legend>
 		<label for="title">Title</label>
@@ -32,15 +47,15 @@
 		<article>
 			<p><b>{todo.id}. {todo.title}</b></p>
 			<p>{todo.content}</p>
-			<form method="post" action={`?/toggleTodoComplete&id=${todo.id}`}>
+			<form
+				method="post"
+				action={`?/toggleTodoComplete&id=${todo.id}`}
+				on:change={handleChange}
+				on:submit|preventDefault={handleChange}
+			>
 				<label for="completed"
 					>Completed:
-					<input
-						name="completed"
-						checked={todo.completed}
-						type="checkbox"
-						on:input={(e) => handleToggleComplete(e)}
-					/></label
+					<input name="completed" checked={todo.completed} type="checkbox" /></label
 				>
 			</form>
 		</article>
