@@ -37,7 +37,7 @@
 					>Completed:
 					<input
 						name="completed"
-						bind:checked={todo.completed}
+						checked={todo.completed}
 						type="checkbox"
 						on:input={(e) => handleToggleComplete(e)}
 					/></label
