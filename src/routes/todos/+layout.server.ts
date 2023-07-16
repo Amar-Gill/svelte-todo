@@ -1,5 +1,5 @@
-import { db } from '$lib/server';
-import { todos } from '$lib/server/schema';
+import { db } from '$lib/server/drizzle';
+import { todos } from '$lib/server/drizzle/schema';
 import type { LayoutServerLoad } from './$types';
 
 export const load = (async () => {
