@@ -32,13 +32,10 @@
 	<button type="submit">Update</button>
 </form>
 
-<form
-	method="post"
-	action={`?/toggleTodoComplete&id=${todo.id}`}
-	on:change={(e) => dispatch('change', e)}
->
+<form method="post" action="?/toggleTodoComplete" on:change={(e) => dispatch('change', e)}>
 	<label for="completed"
 		>Completed:
 		<input name="completed" checked={todo.completed} type="checkbox" /></label
 	>
+	<input type="hidden" name="id" value={todo.id} />
 </form>

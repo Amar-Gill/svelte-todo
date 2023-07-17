@@ -21,10 +21,10 @@ export const addTodo: Action = async ({ request }) => {
 	});
 };
 
-export const toggleTodoComplete: Action = async ({ request, url }) => {
+export const toggleTodoComplete: Action = async ({ request }) => {
 	const formData = await request.formData();
 	const completed = !!formData.get('completed');
-	const id = parseInt(url.searchParams.get('id'));
+	const id = parseInt(formData.get('id')?.toString());
 	await db.update(todos).set({ completed }).where(eq(todos.id, id));
 };
 
