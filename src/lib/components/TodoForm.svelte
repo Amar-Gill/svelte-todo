@@ -10,7 +10,7 @@
 	};
 
 	const dispatch = createEventDispatcher<{
-		change: Event & { currentTarget: EventTarget & HTMLFormElement };
+		toggleTodo: Event & { currentTarget: EventTarget & HTMLFormElement };
 	}>();
 </script>
 
@@ -32,7 +32,7 @@
 	<button type="submit">Update</button>
 </form>
 
-<form method="post" action="?/toggleTodoComplete" on:change={(e) => dispatch('change', e)}>
+<form method="post" action="?/toggleTodoComplete" on:change={(e) => dispatch('toggleTodo', e)}>
 	<label for="completed"
 		>Completed:
 		<input name="completed" checked={todo.completed} type="checkbox" /></label

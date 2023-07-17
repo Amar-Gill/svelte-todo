@@ -46,7 +46,7 @@
 <div class="todos">
 	{#each data.todos as todo}
 		<article>
-			<TodoForm {todo} on:change={(e) => handleChange(e.detail)} />
+			<TodoForm {todo} on:toggleTodo={(e) => handleChange(e.detail)} />
 		</article>
 	{/each}
 </div>

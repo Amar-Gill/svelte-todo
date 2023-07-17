@@ -21,7 +21,7 @@
 <div class="todos">
 	{#each data.todos as todo}
 		<article>
-			<TodoForm {todo} on:change={(e) => e.detail.currentTarget.submit()} />
+			<TodoForm {todo} on:toggleTodo={(e) => e.detail.currentTarget.submit()} />
 		</article>
 	{/each}
 </div>
