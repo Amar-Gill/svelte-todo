@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import { createEventDispatcher } from 'svelte';
 
 	export let todo: {
@@ -15,11 +16,27 @@
 
 <form
 	method="post"
+	action="?/updateTodo"
+	use:enhance={() => {
+		return async ({ update }) => {
+			await update({ reset: false });
+		};
+	}}
+>
+	<label
+		>{todo.id}. title:
+		<input value={todo.title} type="text" name="title" /></label
+	>
+	<label> <input type="text" name="content" value={todo.content} /></label>
+	<input type="hidden" name="id" value={todo.id} />
+	<button type="submit">Update</button>
+</form>
+
+<form
+	method="post"
 	action={`?/toggleTodoComplete&id=${todo.id}`}
 	on:change={(e) => dispatch('change', e)}
 >
-	<p><b>{todo.id}. {todo.title}</b></p>
-	<p>{todo.content}</p>
 	<label for="completed"
 		>Completed:
 		<input name="completed" checked={todo.completed} type="checkbox" /></label

@@ -27,3 +27,12 @@ export const toggleTodoComplete: Action = async ({ request, url }) => {
 	const id = parseInt(url.searchParams.get('id'));
 	await db.update(todos).set({ completed }).where(eq(todos.id, id));
 };
+
+export const updateTodo: Action = async ({ request }) => {
+	const formData = await request.formData();
+	console.log(formData);
+	const title = formData.get('title')?.toString();
+	const content = formData.get('content')?.toString();
+	const id = parseInt(formData.get('id')?.toString());
+	await db.update(todos).set({ title, content }).where(eq(todos.id, id));
+};
