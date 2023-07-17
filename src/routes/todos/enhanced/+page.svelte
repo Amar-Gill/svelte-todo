@@ -46,8 +46,6 @@
 <div class="todos">
 	{#each data.todos as todo}
 		<article>
-			<p><b>{todo.id}. {todo.title}</b></p>
-			<p>{todo.content}</p>
 			<TodoForm {todo} on:change={(e) => handleChange(e.detail)} />
 		</article>
 	{/each}

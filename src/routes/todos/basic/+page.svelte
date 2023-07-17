@@ -21,8 +21,6 @@
 <div class="todos">
 	{#each data.todos as todo}
 		<article>
-			<p><b>{todo.id}. {todo.title}</b></p>
-			<p>{todo.content}</p>
 			<TodoForm {todo} on:change={(e) => e.detail.currentTarget.submit()} />
 		</article>
 	{/each}
