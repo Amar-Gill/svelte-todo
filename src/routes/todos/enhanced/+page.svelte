@@ -7,7 +7,7 @@
 
 	export let data: PageData;
 
-	async function handleChange(
+	async function handleTodoToggle(
 		event: Event & {
 			currentTarget: EventTarget & HTMLFormElement;
 		}
@@ -46,7 +46,7 @@
 <div class="todos">
 	{#each data.todos as todo}
 		<article>
-			<TodoForm {todo} on:toggleTodo={(e) => handleChange(e.detail)} />
+			<TodoForm {todo} on:toggleTodo={(e) => handleTodoToggle(e.detail)} />
 		</article>
 	{/each}
 </div>
