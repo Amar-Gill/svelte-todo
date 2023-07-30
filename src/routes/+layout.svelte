@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import type { AuthenticationInfo } from '@propelauth/javascript';
 	import { authClient } from '$lib/propelauth';
 	import { writable } from 'svelte/store';
@@ -9,6 +9,8 @@
 	onMount(async () => {
 		auth.set(await authClient.getAuthenticationInfoOrNull(true));
 	});
+
+	setContext('auth', auth);
 </script>
 
 <nav>
