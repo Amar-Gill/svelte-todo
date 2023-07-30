@@ -17,7 +17,8 @@ export const addTodo: Action = async ({ request }) => {
 	const formData = await request.formData();
 	await db.insert(todos).values({
 		title: formData.get('title')?.toString(),
-		content: formData.get('content')?.toString()
+		content: formData.get('content')?.toString(),
+		userId: formData.get('userId')?.toString()
 	});
 };
 

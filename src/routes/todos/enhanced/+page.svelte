@@ -4,6 +4,11 @@
 	import type { PageData } from './$types';
 	import { invalidateAll } from '$app/navigation';
 	import TodoForm from '$lib/components/TodoForm.svelte';
+	import { getContext } from 'svelte';
+	import type { AuthenticationInfo } from '@propelauth/javascript';
+	import type { Writable } from 'svelte/store';
+
+	const auth = getContext<Writable<AuthenticationInfo | null>>('auth');
 
 	export let data: PageData;
 
@@ -38,6 +43,7 @@
 		<input type="text" name="title" />
 		<label for="content">Content</label>
 		<input type="text" name="content" />
+		<input type="hidden" name="userId" value={$auth?.user.userId} />
 		<div>
 			<button type="submit">Add</button>
 		</div>
