@@ -2,10 +2,12 @@
 	import { onMount } from 'svelte';
 	import type { AuthenticationInfo } from '@propelauth/javascript';
 	import { authClient } from '$lib/propelauth';
+	import { writable } from 'svelte/store';
 
-	let auth: AuthenticationInfo | null = null;
+	const auth = writable<AuthenticationInfo | null>(null);
+
 	onMount(async () => {
-		auth = await authClient.getAuthenticationInfoOrNull(true);
+		auth.set(await authClient.getAuthenticationInfoOrNull(true));
 	});
 </script>
 
@@ -16,7 +18,7 @@
 	<a href="/login">login</a>
 </nav>
 <div>
-	<span>Logged in as: {auth?.user.email} | {auth?.user.userId}</span>
+	<span>Logged in as: {$auth?.user.email} | {$auth?.user.userId}</span>
 </div>
 
 <slot />
